@@ -16,11 +16,12 @@ namespace Azure.AI.Translation.Document.Tests
         /// </summary>
         /// <param name="isAsync">A flag used by the Azure Core Test Framework to differentiate between tests for asynchronous and synchronous methods.</param>
         public DocumentTranslationClientLiveTests(bool isAsync)
-            : base(isAsync)
+            : base(isAsync, RecordedTestMode.Live)
         {
         }
 
         [RecordedTest]
+        [Ignore("Service not returning Content-type on error response")]
         public void ClientCannotAuthenticateWithFakeApiKey()
         {
             DocumentTranslationClient client = GetClient(credential: new AzureKeyCredential("fakeKey"));
